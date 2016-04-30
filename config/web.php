@@ -10,14 +10,19 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'tqWf4X82P5J_-B6Ihnv966Eom_r-ayuJ',
+			'parsers' => [
+				'application/json' => 'yii\web\JsonParser',
+			]			
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+		/*
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
         ],
+		*/
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -38,15 +43,60 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],
-        */
+        
+		'urlManager' => [
+			'enablePrettyUrl' => true,
+			'enableStrictParsing' => true,
+			'showScriptName' => false,
+			'rules' => [
+				['class' => 'yii\rest\UrlRule', 'controller' => 'api/user'],
+			],
+		],
+        
+		'i18n' => [
+			'translations' => [
+				'app'=>array(
+					'class' => 'yii\i18n\PhpMessageSource',
+					'basePath' => "@app/messages",
+					'sourceLanguage' => 'en_US',
+					'fileMap' => array(
+						'app'=>'app.php'                    
+					)
+				),
+				'user'=>array(
+					'class' => 'yii\i18n\PhpMessageSource',
+					'basePath' => "@dektrium/user/messages",
+					'sourceLanguage' => 'en_US',
+					'fileMap' => array(
+						'user'=>'user.php'    
+					)
+				)			
+			],
+		],
+		
+		'response' => [
+			'class' => 'yii\web\Response',
+			'on beforeSend' => function ($event) {
+				$response = $event->sender;
+				if ($response->data !== null) {
+					$response->data = [
+						'success' => $response->isSuccessful,
+						'data' => $response->data,
+					];
+					$response->statusCode = 200;
+				}
+			},
+		],		
+		
     ],
+	'modules' => [
+		'user' => [
+			'class' => 'dektrium\user\Module',
+		],	
+		'api' => [
+			'class' => 'app\modules\api\Module',
+		],
+	],
     'params' => $params,
 ];
 
