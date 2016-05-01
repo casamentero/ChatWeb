@@ -67,7 +67,7 @@ class User extends \dektrium\user\models\User
 	
 	public function init(){
 		//Create handler for event triggered by User class after successful registration
-		$this->on(SELF::AFTER_REGISTER, [$this,'registeredCallback']);
+		$this->on(self::AFTER_REGISTER, [$this,'registeredCallback']);
 	}
 	
 	public function registeredCallback(){
