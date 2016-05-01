@@ -84,6 +84,7 @@ class UserController extends ActiveController
 
         if($model->validate()) {
 			if($model->register()){
+				die('created successfully');
 				throw new \yii\web\HttpException(201, 'Account created successfully.');
 			} else{
 				throw new \yii\web\HttpException(422, 'error');
