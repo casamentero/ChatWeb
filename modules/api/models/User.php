@@ -64,4 +64,16 @@ class User extends \dektrium\user\models\User
 	{
 		return ['profile'];
 	}
+	
+	public function init(){
+		//Create handler for event triggered by User class after successful registration
+		$this->on(SELF::AFTER_REGISTER, [$this,'registeredCallback']);
+	}
+	
+	public function registeredCallback(){
+		$this->rabbitmq_routing_key 	= $this->id;
+		$this->rabbitmq_channel_name 	= $this->id;
+		$this->save();
+	}
+	
 }

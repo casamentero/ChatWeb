@@ -28,24 +28,22 @@ class UserController extends ActiveController
 {
 	public $modelClass = 'app\modules\api\models\User';
 	
-public function behaviors()
-{
-    return [
-        [
-            'class' => 'yii\filters\ContentNegotiator',
-            'only' => ['view', 'index'],  // in a controller
-            // if in a module, use the following IDs for user actions
-            // 'only' => ['user/view', 'user/index']
-            'formats' => [
-                'application/json' => Response::FORMAT_JSON,
-            ],
-            'languages' => [
-                'en',
-                'de',
-            ],
-        ],
-    ];
-}
+	public function behaviors()
+	{
+		return [
+			[
+				'class' => 'yii\filters\ContentNegotiator',
+				'only' => ['create','index','view'],  // in a controller
+				'formats' => [
+					'application/json' => Response::FORMAT_JSON,
+				],
+				'languages' => [
+					'en',
+					'de',
+				],
+			],
+		];
+	}
 
 	public function actions()
     {
@@ -74,10 +72,10 @@ public function behaviors()
         $model = Yii::createObject(RegistrationForm::className());
         $user = Yii::createObject(User::className());
 		
-		$model->email 	 	= Yii::$app->request->post('email');
-		$model->password 	= Yii::$app->request->post('password');
-		$model->first_name 	= Yii::$app->request->post('first_name');
-		$model->last_name 	= Yii::$app->request->post('last_name');
+		$model->email 	 		= Yii::$app->request->post('email');
+		$model->password 		= Yii::$app->request->post('password');
+		$model->first_name 		= Yii::$app->request->post('first_name');
+		$model->last_name		= Yii::$app->request->post('last_name');
 		
 		//Generate username from user model by passing email
 		$user->email = $model->email;
@@ -88,7 +86,7 @@ public function behaviors()
 			if($model->register()){
 				throw new \yii\web\HttpException(201, 'Account created successfully.');
 			} else{
-				throw new \yii\web\HttpException(422, '');
+				throw new \yii\web\HttpException(422, 'error');
 			}
 		} else{
 			$errors = $model->getErrors();

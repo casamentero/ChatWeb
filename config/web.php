@@ -12,7 +12,7 @@ $config = [
             'cookieValidationKey' => 'tqWf4X82P5J_-B6Ihnv966Eom_r-ayuJ',
 			'parsers' => [
 				'application/json' => 'yii\web\JsonParser',
-			]			
+			]
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -74,6 +74,7 @@ $config = [
 			],
 		],
 		
+		/*
 		'response' => [
 			'class' => 'yii\web\Response',
 			'on beforeSend' => function ($event) {
@@ -86,7 +87,9 @@ $config = [
 					$response->statusCode = 200;
 				}
 			},
-		],		
+		],
+		*/
+			
 		
     ],
 	'modules' => [
