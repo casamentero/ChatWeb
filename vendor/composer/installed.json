@@ -1353,5 +1353,49 @@
             "rest",
             "web service"
         ]
+    },
+    {
+        "name": "richweber/yii2-google-translate-api",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/RichWeber/yii2-google-translate-api.git",
+            "reference": "8c7e47bd8c3309f6dcb4869141e2c30a3a231537"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/RichWeber/yii2-google-translate-api/zipball/8c7e47bd8c3309f6dcb4869141e2c30a3a231537",
+            "reference": "8c7e47bd8c3309f6dcb4869141e2c30a3a231537",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2": "*"
+        },
+        "time": "2015-02-18 22:53:39",
+        "type": "yii2-extension",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "richweber\\google\\translate\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "RichWeber",
+                "email": "rbagatyi@gmail.com"
+            }
+        ],
+        "description": "Yii2 extension to Google Translate API",
+        "keywords": [
+            "api",
+            "google",
+            "translate",
+            "yii2"
+        ]
     }
 ]

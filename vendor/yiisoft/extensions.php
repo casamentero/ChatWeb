@@ -85,4 +85,13 @@ return array (
     ),
     'bootstrap' => 'dektrium\\user\\Bootstrap',
   ),
+  'richweber/yii2-google-translate-api' => 
+  array (
+    'name' => 'richweber/yii2-google-translate-api',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@richweber/google/translate' => $vendorDir . '/richweber/yii2-google-translate-api',
+    ),
+  ),
 );

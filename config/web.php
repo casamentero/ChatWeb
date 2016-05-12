@@ -49,7 +49,7 @@ $config = [
 			'enableStrictParsing' => true,
 			'showScriptName' => false,
 			'rules' => [
-				['class' => 'yii\rest\UrlRule', 'controller' => ['api/user','api/profile']],
+				['class' => 'yii\rest\UrlRule', 'controller' => ['api/user','api/profile','api/language','api/chat']],
 			],
 		],
         
@@ -89,6 +89,11 @@ $config = [
 			},
 		],
 		*/
+		
+    'translate' => [
+        'class' => 'richweber\google\translate\Translation',
+        'key' => 'AIzaSyD3uWHu3Wc5b4SkZtVbsC9ExJleCS-6gNE',
+    ],
 			
 		
     ],

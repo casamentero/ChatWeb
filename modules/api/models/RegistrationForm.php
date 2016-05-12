@@ -41,6 +41,7 @@ class RegistrationForm extends Model
 	
 	public $first_name;
 	public $last_name;
+	public $languages_id;
 
     /**
      * @inheritdoc
@@ -77,6 +78,7 @@ class RegistrationForm extends Model
 			
 			'first_name' 	=> ['first_name', 'safe'],
 			'last_name' 	=> ['last_name', 'safe'],
+			'languagesIdRequired' => ['languages_id', 'required'],
 			
         ];
     }

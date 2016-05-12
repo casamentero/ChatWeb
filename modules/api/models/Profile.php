@@ -49,6 +49,7 @@ class Profile extends \dektrium\user\models\Profile
             'websiteLength'        => ['website', 'string', 'max' => 255],
             'first_name'            => ['first_name', 'safe'],
             'last_name'            => ['last_name', 'safe'],
+            'languages_id'         => ['languages_id', 'safe'],
         ];
     }
 

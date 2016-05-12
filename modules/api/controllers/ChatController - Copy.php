@@ -18,15 +18,17 @@
 namespace app\modules\api\controllers;
 use yii\rest\ActiveController;
 use app\modules\api\models\User;
-use app\modules\api\models\RegistrationForm;
+use app\modules\api\models\Profile;
+use app\modules\api\models\Chat;
+use app\modules\api\models\ChatTranslation;
 use Yii;
 use yii\helpers\Json;
 use yii\data\ActiveDataProvider;
 use yii\web\Response;
 
-class UserController extends ActiveController
+class ChatController extends ActiveController
 {
-	public $modelClass = 'app\modules\api\models\User';
+	public $modelClass = 'app\modules\api\models\Chat';
 	
 	public function behaviors()
 	{
@@ -68,29 +70,56 @@ class UserController extends ActiveController
 
     public function actionCreate(){
         // implement here your code
-
-        $model = Yii::createObject(RegistrationForm::className());
-        $user = Yii::createObject(User::className());
+		//send(from_id,to_id,message,language);
 		
-		$model->email 	 		= Yii::$app->request->post('email');
-		$model->password 		= Yii::$app->request->post('password');
-		$model->first_name 		= Yii::$app->request->post('first_name');
-		$model->last_name		= Yii::$app->request->post('last_name');
-		$model->languages_id	= Yii::$app->request->post('languages_id');
+        $chat = Yii::createObject(Chat::className());
 		
-		//Generate username from user model by passing email
-		$user->email = $model->email;
-		$user->generateUsername();
-		$model->username = $user->username;
-
-        if($model->validate()) {
-			if($model->register()){
-				throw new \yii\web\HttpException(201, 'Account created successfully.');
+		$chat->from_id 		= Yii::$app->request->post('from_id');
+		$chat->to_id 			= Yii::$app->request->post('to_id');
+		$chat->message 		= Yii::$app->request->post('message');
+		$chat->language 		= Yii::$app->request->post('language');
+		
+		
+		if($chat->validate()){
+		
+			# Translate language
+			/*
+			switch($chat->language){
+				case 'en':
+					$translation = Yii::$app->translate->translate('en', 'pa', $chat->message);
+					if(isset($translation['data'])){
+						$message_en = $chat->message;
+						$message_es = $translation['data']['translations'][0]['translatedText'];
+					}
+				break;
+				case 'es':
+					$translation = Yii::$app->translate->translate('es', 'en', $chat->message);
+					if(isset($translation['data'])){
+						$message_en = $translation['data']['translations'][0]['translatedText'];
+						$message_es = $chat->message;
+					}
+				break;
+			}
+			*/
+			if($chat->save()){
+				# Save English version
+				$chatTranslation = new ChatTranslation();
+				$chatTranslation->chat_id = $chat->id;
+				$chatTranslation->languages_id = 1;
+				$chatTranslation->chat_message_translation = $message_en;
+				$chatTranslation->save();
+				# Save Spanish version
+				$chatTranslation = new ChatTranslation();
+				$chatTranslation->chat_id = $chat->id;
+				$chatTranslation->languages_id = 2;
+				$chatTranslation->chat_message_translation = $message_es;
+				$chatTranslation->save();
+				throw new \yii\web\HttpException(201, 'Message created successfully.');
 			} else{
 				throw new \yii\web\HttpException(422, 'error');
 			}
 		} else{
-			$errors = $model->getErrors();
+			$errors = $chat->getErrors();
 			$errors = Json::encode($errors);
 			throw new \yii\web\HttpException(422,$errors);
 		}

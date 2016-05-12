@@ -18,22 +18,22 @@
 namespace app\modules\api\controllers;
 use yii\rest\ActiveController;
 use app\modules\api\models\User;
-use app\modules\api\models\RegistrationForm;
+use app\modules\api\models\Profile;
 use Yii;
 use yii\helpers\Json;
 use yii\data\ActiveDataProvider;
 use yii\web\Response;
 
-class UserController extends ActiveController
+class LanguageController extends ActiveController
 {
-	public $modelClass = 'app\modules\api\models\User';
+	public $modelClass = 'app\modules\api\models\Languages';
 	
 	public function behaviors()
 	{
 		return [
 			[
 				'class' => 'yii\filters\ContentNegotiator',
-				'only' => ['create','index','view'],  // in a controller
+				'only' => ['index','view'],  // in a controller
 				'formats' => [
 					'application/json' => Response::FORMAT_JSON,
 				],
@@ -49,50 +49,6 @@ class UserController extends ActiveController
     {
         $actions = parent::actions();
         unset($actions['create']);
-       // unset($actions['index']);
         return $actions;
-    }
-	
-	/*
-	public function actionIndex()
-	{
-		$q = new yii\db\Query;
-		$query = $q->select('user.*, profile.*')
-		->from('user, profile')
-		->where('user.id = profile.user_id');
-		return new ActiveDataProvider([
-		'query' => $query
-		]);
-	}
-	*/	
-
-    public function actionCreate(){
-        // implement here your code
-
-        $model = Yii::createObject(RegistrationForm::className());
-        $user = Yii::createObject(User::className());
-		
-		$model->email 	 		= Yii::$app->request->post('email');
-		$model->password 		= Yii::$app->request->post('password');
-		$model->first_name 		= Yii::$app->request->post('first_name');
-		$model->last_name		= Yii::$app->request->post('last_name');
-		$model->languages_id	= Yii::$app->request->post('languages_id');
-		
-		//Generate username from user model by passing email
-		$user->email = $model->email;
-		$user->generateUsername();
-		$model->username = $user->username;
-
-        if($model->validate()) {
-			if($model->register()){
-				throw new \yii\web\HttpException(201, 'Account created successfully.');
-			} else{
-				throw new \yii\web\HttpException(422, 'error');
-			}
-		} else{
-			$errors = $model->getErrors();
-			$errors = Json::encode($errors);
-			throw new \yii\web\HttpException(422,$errors);
-		}
     }
 }

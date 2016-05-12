@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bb4942eb9426adddab4652451af520dd",
-    "content-hash": "a3f7e194f42850b5cb161ded6938453e",
+    "hash": "2e3792e25d88823eec1e171ccc55b92b",
+    "content-hash": "5a97eeef2bbc088373ebb2c1a1786018",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -606,6 +606,48 @@
                 "response"
             ],
             "time": "2015-05-04 20:22:00"
+        },
+        {
+            "name": "richweber/yii2-google-translate-api",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RichWeber/yii2-google-translate-api.git",
+                "reference": "8c7e47bd8c3309f6dcb4869141e2c30a3a231537"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RichWeber/yii2-google-translate-api/zipball/8c7e47bd8c3309f6dcb4869141e2c30a3a231537",
+                "reference": "8c7e47bd8c3309f6dcb4869141e2c30a3a231537",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "richweber\\google\\translate\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "RichWeber",
+                    "email": "rbagatyi@gmail.com"
+                }
+            ],
+            "description": "Yii2 extension to Google Translate API",
+            "keywords": [
+                "api",
+                "google",
+                "translate",
+                "yii2"
+            ],
+            "time": "2015-02-18 22:53:39"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1314,7 +1356,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "dektrium/yii2-user": 20
+        "dektrium/yii2-user": 20,
+        "richweber/yii2-google-translate-api": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
