@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "*",
         "dektrium/yii2-user": "0.9.*@dev",
         "guzzlehttp/guzzle": "^6.2",
-        "richweber/yii2-google-translate-api": "dev-master"
+        "richweber/yii2-google-translate-api": "dev-master",
+		"webtoucher/yii2-amqp": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

@@ -90,10 +90,19 @@ $config = [
 		],
 		*/
 		
-    'translate' => [
-        'class' => 'richweber\google\translate\Translation',
-        'key' => 'AIzaSyD3uWHu3Wc5b4SkZtVbsC9ExJleCS-6gNE',
-    ],
+		'translate' => [
+			'class' => 'richweber\google\translate\Translation',
+			'key' => 'AIzaSyD3uWHu3Wc5b4SkZtVbsC9ExJleCS-6gNE',
+		],
+		
+        'amqp' => [
+            'class' => 'webtoucher\amqp\components\Amqp',
+            'host' => '162.144.209.190',
+            'port' => 5672,
+            'user' => 'test',
+            'password' => 'test',
+            'vhost' => '/',
+        ],		
 			
 		
     ],

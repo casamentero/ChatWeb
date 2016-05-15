@@ -25,6 +25,7 @@ use Yii;
 use yii\helpers\Json;
 use yii\data\ActiveDataProvider;
 use yii\web\Response;
+use PhpAmqpLib\Message\AMQPMessage;
 
 class ChatController extends ActiveController
 {
@@ -69,6 +70,7 @@ class ChatController extends ActiveController
 	*/	
 
     public function actionCreate(){
+	
         // implement here your code
 		//send(from_id,to_id,chat_message,languages_id);
 		
@@ -80,11 +82,37 @@ class ChatController extends ActiveController
 		$chat->languages_id 	= Yii::$app->request->post('languages_id');
 		
 		if($chat->validate()){
+		
+			try {
+				$exchangeName = "message_ex";
+				$connection = Yii::$app->amqp->getConnection();
+				$channel = $connection->channel();
+				
+				$channel->exchange_declare($exchangeName, 'topic', $passive=false, $durable=true, $auto_delete=false);
+				
+				#Publish message to exchange for routing key of receiver
+				#Example : message.user.31
+				$routingKey = 'message.user.'.$chat->to_id;
+				$msg = new AMQPMessage($chat->chat_message);
+				$channel->basic_publish($msg,$exchangeName,$routingKey);
+				
+				#Close connections
+				$channel->close();
+				$connection->close();
+
+				throw new \yii\web\HttpException(201, 'Message created successfully.');
+			} catch(Exception $e) {
+				throw new \yii\web\HttpException(422, 'error');
+			}
+			
+			/*
 			if($chat->save()){
 				throw new \yii\web\HttpException(201, 'Message created successfully.');
 			} else{
 				throw new \yii\web\HttpException(422, 'error');
 			}
+			*/
+			
 		} else{
 			$errors = $chat->getErrors();
 			$errors = Json::encode($errors);
