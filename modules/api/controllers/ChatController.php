@@ -80,6 +80,16 @@ class ChatController extends ActiveController
 		$chat->to_id 			= Yii::$app->request->post('to_id');
 		$chat->chat_message 	= Yii::$app->request->post('chat_message');
 		$chat->languages_id 	= Yii::$app->request->post('languages_id');
+		
+		//Chat message object
+		$message = new \stdClass;
+		$message->from_id 		= $chat->from_id;
+		$message->to_id 		= $chat->to_id;
+		$message->chat_message 	= $chat->chat_message;
+		$message->languages_id 	= $chat->languages_id;
+		$message->created_at 	= time();
+		$message = Json::encode($message);
+		
 
 		$chat->rabbitmq_exchange_name 	= Yii::$app->request->post('rabbitmq_exchange_name');
 		$chat->rabbitmq_queue_name 		= Yii::$app->request->post('rabbitmq_queue_name');
@@ -97,7 +107,7 @@ class ChatController extends ActiveController
 				$channel->exchange_declare($exchangeName, 'topic', $passive=false, $durable=true, $auto_delete=false);
 				
 				#Publish message to exchange for routing key of receiver
-				$msg = new AMQPMessage($chat->chat_message);
+				$msg = new AMQPMessage($message);
 				$channel->basic_publish($msg,$exchangeName,$routingKey);
 				
 				#Close connections
