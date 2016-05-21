@@ -60,6 +60,7 @@ class Chat extends \yii\db\ActiveRecord
             [['languages_id'], 'exist', 'skipOnError' => true, 'targetClass' => Languages::className(), 'targetAttribute' => ['languages_id' => 'id']],
             [['from_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['from_id' => 'id']],
             [['to_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['to_id' => 'id']],
+			[['rabbitmq_exchange_name','rabbitmq_queue_name','rabbitmq_routing_key'],'safe'],
         ];
     }
 

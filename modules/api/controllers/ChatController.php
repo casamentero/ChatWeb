@@ -72,7 +72,7 @@ class ChatController extends ActiveController
     public function actionCreate(){
 	
         // implement here your code
-		//send(from_id,to_id,chat_message,languages_id);
+		//send(from_id,to_id,chat_message,languages_id,rabbitmq_exchange_name,rabbitmq_queue_name,rabbitmq_routing_key);
 		
         $chat = Yii::createObject(Chat::className());
 		
@@ -80,19 +80,23 @@ class ChatController extends ActiveController
 		$chat->to_id 			= Yii::$app->request->post('to_id');
 		$chat->chat_message 	= Yii::$app->request->post('chat_message');
 		$chat->languages_id 	= Yii::$app->request->post('languages_id');
+
+		$chat->rabbitmq_exchange_name 	= Yii::$app->request->post('rabbitmq_exchange_name');
+		$chat->rabbitmq_queue_name 		= Yii::$app->request->post('rabbitmq_queue_name');
+		$chat->rabbitmq_routing_key 	= Yii::$app->request->post('rabbitmq_routing_key');
 		
 		if($chat->validate()){
 		
 			try {
-				$exchangeName = "message_ex";
+				$exchangeName 	= $chat->rabbitmq_exchange_name;
+				$routingKey 	= $chat->rabbitmq_routing_key;
+				
 				$connection = Yii::$app->amqp->getConnection();
 				$channel = $connection->channel();
 				
 				$channel->exchange_declare($exchangeName, 'topic', $passive=false, $durable=true, $auto_delete=false);
 				
 				#Publish message to exchange for routing key of receiver
-				#Example : message.user.31
-				$routingKey = 'message.user.'.$chat->to_id;
 				$msg = new AMQPMessage($chat->chat_message);
 				$channel->basic_publish($msg,$exchangeName,$routingKey);
 				

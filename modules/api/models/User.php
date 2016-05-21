@@ -71,8 +71,9 @@ class User extends \dektrium\user\models\User
 	}
 	
 	public function registeredCallback(){
-		$this->rabbitmq_routing_key 	= $this->id;
-		$this->rabbitmq_channel_name 	= $this->id;
+		$this->rabbitmq_exchange_name 	= "chat.message.exchange";
+		$this->rabbitmq_queue_name 		= "chat.message.user.".$this->id;
+		$this->rabbitmq_routing_key 	= "chat.message.user.".$this->id;
 		$this->save();
 	}
 	
