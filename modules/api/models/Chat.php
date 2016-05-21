@@ -27,7 +27,6 @@ class Chat extends \yii\db\ActiveRecord
 
 	public $rabbitmq_exchange_name 	= "";
 	public $rabbitmq_queue_name 	= "";
-	public $rabbitmq_exchange_name 	= "";
 	public $rabbitmq_routing_key 	= ""
 
 	public function extraFields()
