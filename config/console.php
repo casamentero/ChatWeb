@@ -23,6 +23,15 @@ $config = [
             ],
         ],
         'db' => $db,
+		
+        'amqp' => [
+            'class' => 'webtoucher\amqp\components\Amqp',
+            'host' => '162.144.209.190',
+            'port' => 5672,
+            'user' => 'test',
+            'password' => 'test',
+            'vhost' => '/',
+        ],		
     ],
     'params' => $params,
     /*
