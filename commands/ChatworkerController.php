@@ -1,6 +1,4 @@
 <?php
-set_time_limit(0);
-
 namespace app\commands;
 
 use yii\console\Controller;
@@ -16,6 +14,8 @@ use app\modules\api\models\Chat;
 class ChatworkerController extends Controller{
     public function actionIndex()
     {
+		set_time_limit(0);
+
 		$queueName 		= "chat.message.user.db";
 		$exchangeName 	= 'chat.message.exchange';
 		$routingKey 	= 'chat.message.user.#';
