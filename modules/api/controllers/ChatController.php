@@ -93,6 +93,10 @@ class ChatController extends ActiveController
 		$chat->chat_message_id 		= $this->generateMessageId($chat->from_id,$chat->to_id);
 		$chat->languages_id 		= Yii::$app->request->post('languages_id');
 		
+		echo $chat->chat_message_id;
+		die();
+		
+		
 		//Chat message object
 		$message = new \stdClass;
 		$message->from_id 			= $chat->from_id;
