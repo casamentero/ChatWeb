@@ -93,10 +93,6 @@ class ChatController extends ActiveController
 		$chat->chat_message_id 		= $this->generateMessageId($chat->from_id,$chat->to_id);
 		$chat->languages_id 		= Yii::$app->request->post('languages_id');
 		
-		echo $chat->chat_message_id;
-		die();
-		
-		
 		//Chat message object
 		$message = new \stdClass;
 		$message->from_id 			= $chat->from_id;
@@ -107,7 +103,6 @@ class ChatController extends ActiveController
 		$message->created_at 		= time();
 		
 		$message = Json::encode($message);
-		
 
 		$chat->rabbitmq_exchange_name 	= Yii::$app->request->post('rabbitmq_exchange_name');
 		$chat->rabbitmq_queue_name 		= Yii::$app->request->post('rabbitmq_queue_name');
