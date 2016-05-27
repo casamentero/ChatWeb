@@ -87,18 +87,21 @@ class ChatController extends ActiveController
 		
         $chat = Yii::createObject(Chat::className());
 		
-		$chat->from_id 			= Yii::$app->request->post('from_id');
-		$chat->to_id 			= Yii::$app->request->post('to_id');
-		$chat->chat_message 	= Yii::$app->request->post('chat_message');
-		$chat->languages_id 	= Yii::$app->request->post('languages_id');
+		$chat->from_id 				= Yii::$app->request->post('from_id');
+		$chat->to_id 				= Yii::$app->request->post('to_id');
+		$chat->chat_message 		= Yii::$app->request->post('chat_message');
+		$chat->chat_message_id 		= $this->generateMessageId($chat->from_id,$chat->to_id);
+		$chat->languages_id 		= Yii::$app->request->post('languages_id');
 		
 		//Chat message object
 		$message = new \stdClass;
-		$message->from_id 		= $chat->from_id;
-		$message->to_id 		= $chat->to_id;
-		$message->chat_message 	= $chat->chat_message;
-		$message->languages_id 	= $chat->languages_id;
-		$message->created_at 	= time();
+		$message->from_id 			= $chat->from_id;
+		$message->to_id 			= $chat->to_id;
+		$message->chat_message 		= $chat->chat_message;
+		$message->chat_message_id 	= $chat->chat_message_id;
+		$message->languages_id 		= $chat->languages_id;
+		$message->created_at 		= time();
+		
 		$message = Json::encode($message);
 		
 
@@ -124,8 +127,11 @@ class ChatController extends ActiveController
 				#Close connections
 				$channel->close();
 				$connection->close();
-
-				throw new \yii\web\HttpException(201, 'Message created successfully.');
+				
+				$message = new \stdClass;
+				$message->chat_message_id 	= $chat->chat_message_id;
+				$message = Json::encode($message);
+				throw new \yii\web\HttpException(201, $message);
 			} catch(Exception $e) {
 				throw new \yii\web\HttpException(422, 'error');
 			}
@@ -144,4 +150,16 @@ class ChatController extends ActiveController
 			throw new \yii\web\HttpException(422,$errors);
 		}
     }
+	
+	private function generateMessageId($from_id,$to_id){
+		$id = $this->milliseconds();
+		$id = $from_id.$to_id.$id;
+		return $id;
+	}
+	
+	private function milliseconds() {
+		$mt = explode(' ', microtime());
+		return $mt[1] * 1000 + round($mt[0] * 1000);
+	}	
+	
 }

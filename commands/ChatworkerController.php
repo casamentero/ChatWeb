@@ -30,11 +30,12 @@ class ChatworkerController extends Controller{
 		$callback = function($msg){
 			$body = JSON::decode($msg->body);
 			$chat = new Chat();
-			$chat->from_id 		= $body['from_id'];
-			$chat->to_id 		= $body['to_id'];
-			$chat->chat_message = $body['chat_message'];
-			$chat->languages_id = $body['languages_id'];
-			$chat->created_at 	= $body['created_at'];
+			$chat->from_id 			= $body['from_id'];
+			$chat->to_id 			= $body['to_id'];
+			$chat->chat_message 	= $body['chat_message'];
+			$chat->chat_message_id 	= $body['chat_message_id'];
+			$chat->languages_id 	= $body['languages_id'];
+			$chat->created_at 		= $body['created_at'];
 			$chat->save();
 		};
 
