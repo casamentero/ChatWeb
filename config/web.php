@@ -74,7 +74,6 @@ $config = [
 			],
 		],
 		
-		/*
 		'response' => [
 			'class' => 'yii\web\Response',
 			'on beforeSend' => function ($event) {
@@ -88,7 +87,6 @@ $config = [
 				}
 			},
 		],
-		*/
 		
 		'translate' => [
 			'class' => 'richweber\google\translate\Translation',

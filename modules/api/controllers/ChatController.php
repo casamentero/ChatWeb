@@ -127,26 +127,16 @@ class ChatController extends ActiveController
 				$channel->close();
 				$connection->close();
 				
-				$message = new \stdClass;
-				$message->chat_message_id 	= $chat->chat_message_id;
-				$message = Json::encode($message);
-				throw new \yii\web\HttpException(201, $message);
+				$response = ["chat_message_id" => $chat->chat_message_id];
+				return $response;
 			} catch(Exception $e) {
 				throw new \yii\web\HttpException(422, 'error');
 			}
-			
-			/*
-			if($chat->save()){
-				throw new \yii\web\HttpException(201, 'Message created successfully.');
-			} else{
-				throw new \yii\web\HttpException(422, 'error');
-			}
-			*/
-			
+						
 		} else{
-			$errors = $chat->getErrors();
-			$errors = Json::encode($errors);
-			throw new \yii\web\HttpException(422,$errors);
+			Yii::$app->response->statusCode = 422;
+			$response = ["errors" => $chat->getErrors()];
+			return $response;
 		}
     }
 	
@@ -155,5 +145,5 @@ class ChatController extends ActiveController
 		$id = rand(1,100).$from_id.$to_id.$time;
 		return $id;
 	}
-	
+		
 }
