@@ -64,22 +64,45 @@ class ChatController extends ActiveController
         $actions = parent::actions();
         unset($actions['create']);
        // unset($actions['index']);
+	   
+		$actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
+	   
         return $actions;
     }
 	
-	/*
-	public function actionIndex()
+	public function prepareDataProvider() 
 	{
+		/*
+		http://api.chatndate.com/web/api/chats
+		http://api.chatndate.com/web/api/chats?page=2
+		http://api.chatndate.com/web/api/chats?users=1,2
+		*/
+	
+		$users = Yii::$app->request->get('users');
+		
 		$q = new yii\db\Query;
-		$query = $q->select('user.*, profile.*')
-		->from('user, profile')
-		->where('user.id = profile.user_id');
+		$q = $q->select('chat.*')
+		->from('chat');
+		
+		if($users!=""){
+			$users = explode(',',$users);
+			if(count($users)==2){
+				$q->andWhere('(
+				(chat.from_id = '.$users[0].') AND (chat.to_id  = '.$users[1].')
+				OR 
+				(chat.from_id = '.$users[1].') AND (chat.to_id  = '.$users[0].')
+				)');
+			} elseif(count($users)>2){
+				$q->andWhere('((chat.from_id IN('.$users.')) AND (chat.to_id IN('.$users.')))');
+			}
+		}
+		
+		$q->addOrderBy('chat.id DESC');
 		return new ActiveDataProvider([
-		'query' => $query
+		'query' => $q
 		]);
 	}
-	*/	
-
+	
     public function actionCreate(){
 	
         // implement here your code
