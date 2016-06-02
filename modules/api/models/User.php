@@ -60,6 +60,15 @@ use dektrium\user\models\Token;
  */
 class User extends \dektrium\user\models\User
 {
+	public 	$user_image = 'http://lorempixel.com/100/100/people/';
+
+    public function fields()
+    {
+		$fields = parent::fields();
+		$fields['user_image'] = 'user_image';
+		return $fields;
+    }
+	
 	public function extraFields()
 	{
 		return ['profile'];
