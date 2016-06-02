@@ -32,6 +32,8 @@ use yii\db\ActiveRecord;
 class Profile extends \dektrium\user\models\Profile
 {
 
+	public 	$profile_image = 'http://lorempixel.com/100/100/people/';
+
     /**
      * @inheritdoc
      */
@@ -52,6 +54,18 @@ class Profile extends \dektrium\user\models\Profile
             'languages_id'         => ['languages_id', 'safe'],
         ];
     }
+	
+    public function fields()
+    {
+        return [
+			'user_id'		=>	'user_id',
+			'first_name'	=>	'first_name',
+			'last_name'		=>	'last_name',
+			'gender'		=>	'gender',
+			'languages_id'	=>	'languages_id',
+            'profile_image' => 'profile_image',
+        ];
+    }	
 
     /**
      * @inheritdoc
