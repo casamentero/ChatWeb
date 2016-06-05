@@ -76,9 +76,11 @@ class ChatController extends ActiveController
 		http://api.chatndate.com/web/api/chats
 		http://api.chatndate.com/web/api/chats?page=2
 		http://api.chatndate.com/web/api/chats?users=1,2
+		http://api.chatndate.com/web/api/chats?history=today
 		*/
 	
-		$users = Yii::$app->request->get('users');
+		$users 		= Yii::$app->request->get('users');
+		$history 	= Yii::$app->request->get('history');
 		
 		$q = new yii\db\Query;
 		$q = $q->select('chat.*')
@@ -96,6 +98,37 @@ class ChatController extends ActiveController
 				$q->andWhere('((chat.from_id IN('.$users.')) AND (chat.to_id IN('.$users.')))');
 			}
 		}
+		
+		if($history!=""){
+			switch($history){
+				case 'today':
+					$q->andWhere('(DATE(FROM_UNIXTIME(chat.created_at))=(CURDATE()))');
+				break;
+				case 'yesterday':
+					$q->andWhere('(DATE(FROM_UNIXTIME(chat.created_at))=(DATE(DATE_SUB(NOW(), INTERVAL 1 DAY))))');
+				break;
+				case 'currentweek':
+					$q->andWhere('((YEARWEEK(FROM_UNIXTIME(chat.created_at), 1))=(YEARWEEK(CURDATE(), 1)))');
+				break;
+				case 'currentmonth':
+					$q->andWhere('((MONTH(FROM_UNIXTIME(chat.created_at)))=(MONTH(CURDATE())))');
+				break;
+				case 'last2days':
+					$q->andWhere('(DATE(FROM_UNIXTIME(chat.created_at))>=(DATE(DATE_SUB(NOW(), INTERVAL 2 DAY))))');
+				break;
+				case 'last7days':
+					$q->andWhere('(DATE(FROM_UNIXTIME(chat.created_at))>=(DATE(DATE_SUB(NOW(), INTERVAL 7 DAY))))');
+				break;
+				case 'last10days':
+					$q->andWhere('(DATE(FROM_UNIXTIME(chat.created_at))>=(DATE(DATE_SUB(NOW(), INTERVAL 10 DAY))))');
+				break;
+				case 'last31days':
+					$q->andWhere('(DATE(FROM_UNIXTIME(chat.created_at))>=(DATE(DATE_SUB(NOW(), INTERVAL 31 DAY))))');
+				break;
+			}
+		}
+		
+		
 		
 		$q->addOrderBy('chat.id DESC');
 		return new ActiveDataProvider([
