@@ -64,9 +64,8 @@ class ChatController extends ActiveController
         $actions = parent::actions();
         unset($actions['create']);
        // unset($actions['index']);
-	   
 		$actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
-	   
+		
         return $actions;
     }
 	
@@ -77,10 +76,19 @@ class ChatController extends ActiveController
 		http://api.chatndate.com/web/api/chats?page=2
 		http://api.chatndate.com/web/api/chats?users=1,2
 		http://api.chatndate.com/web/api/chats?history=today
+		http://api.chatndate.com/web/api/chats?history=yesterday
+		http://api.chatndate.com/web/api/chats?history=currentweek
+		http://api.chatndate.com/web/api/chats?history=currentmonth
+		http://api.chatndate.com/web/api/chats?history=last2days
+		http://api.chatndate.com/web/api/chats?history=last7days
+		http://api.chatndate.com/web/api/chats?history=last10days
+		http://api.chatndate.com/web/api/chats?history=last31days
 		*/
 	
 		$users 		= Yii::$app->request->get('users');
 		$history 	= Yii::$app->request->get('history');
+		$orderby 	= Yii::$app->request->get('orderby');
+		$startpoint = Yii::$app->request->get('startpoint');
 		
 		$q = new yii\db\Query;
 		$q = $q->select('chat.*')
@@ -128,11 +136,35 @@ class ChatController extends ActiveController
 			}
 		}
 		
+		if($orderby!=""){
+			switch($orderby){
+				case 'asc':
+				$orderby = "ASC";
+				break;
+				case 'desc':
+				$orderby = "DESC";
+				break;
+			}
+		}	
+		
+		if($startpoint!=""){
+			$chat = Chat::find()->select('id')->where(['chat_message_id'=>$startpoint])->one();
+			if($orderby=='ASC'){
+				$q->andWhere('(id > '.$chat->id.')');
+			} elseif($orderby=='DESC'){
+				$q->andWhere('(id < '.$chat->id.')');
+			}
+		}	
+		
+		if($orderby==""){
+			$orderby = "DESC";
+		}
+		
+		$q->addOrderBy('chat.id '.$orderby.'');
 		
 		
-		$q->addOrderBy('chat.id DESC');
 		return new ActiveDataProvider([
-		'query' => $q
+			'query' => $q
 		]);
 	}
 	
