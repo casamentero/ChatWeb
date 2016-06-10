@@ -83,11 +83,15 @@ class ChatController extends ActiveController
 		http://api.chatndate.com/web/api/chats?history=last7days
 		http://api.chatndate.com/web/api/chats?history=last10days
 		http://api.chatndate.com/web/api/chats?history=last31days
+		http://api.chatndate.com/web/api/chats?direction=backward&startpoint=78124568
+		Options:
+		direction = forward|backward
+		startpoint: chat_message_id from where you want to get records
 		*/
 	
 		$users 		= Yii::$app->request->get('users');
 		$history 	= Yii::$app->request->get('history');
-		$orderby 	= Yii::$app->request->get('orderby');
+		$direction 	= Yii::$app->request->get('direction');
 		$startpoint = Yii::$app->request->get('startpoint');
 		
 		$q = new yii\db\Query;
@@ -136,12 +140,14 @@ class ChatController extends ActiveController
 			}
 		}
 		
-		if($orderby!=""){
-			switch($orderby){
-				case 'asc':
+		$orderby = "DESC";
+		
+		if($direction!=""){
+			switch($direction){
+				case 'forward':
 				$orderby = "ASC";
 				break;
-				case 'desc':
+				case 'backward':
 				$orderby = "DESC";
 				break;
 			}
