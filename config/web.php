@@ -79,9 +79,18 @@ $config = [
 			'on beforeSend' => function ($event) {
 				$response = $event->sender;
 				if ($response->data !== null) {
+						$headers = $response->getHeaders();
+						$moredata = false;
+						if(isset($headers['x-pagination-page-count']) && isset($headers['x-pagination-current-page'])){
+							if(($headers['x-pagination-current-page'])<($headers['x-pagination-page-count'])){
+								$moredata = true;
+							}
+						}
+				
 					$response->data = [
-						'success' => $response->isSuccessful,
-						'data' => $response->data,
+						'success' 	=> $response->isSuccessful,
+						'moredata' 	=> $moredata,
+						'data' 		=> $response->data,
 					];
 					$response->statusCode = 200;
 				}

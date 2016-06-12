@@ -155,6 +155,9 @@ class ChatController extends ActiveController
 		
 		if($startpoint!=""){
 			$chat = Chat::find()->select('id')->where(['chat_message_id'=>$startpoint])->one();
+			if($chat===null){
+				throw new \yii\web\HttpException(404, 'error');
+			}
 			if($orderby=='ASC'){
 				$q->andWhere('(id > '.$chat->id.')');
 			} elseif($orderby=='DESC'){
