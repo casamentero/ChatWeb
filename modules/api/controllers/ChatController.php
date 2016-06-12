@@ -236,7 +236,11 @@ class ChatController extends ActiveController
 	
 	private function generateMessageId($from_id,$to_id){
 		$time = time();
-		$id = rand(1,100).$from_id.$to_id.$time;
+		if($from_id<$to_id){
+			$id = $time.$from_id.$to_id;
+		} else{
+			$id = $time.$to_id.$from_id;
+		}
 		return $id;
 	}
 		
