@@ -237,7 +237,7 @@ class ChatController extends ActiveController
 	private function generateMessageId($from_id,$to_id){
 		$time = time();
 		$secs = microtime(true); 
-		$milliseconds = number_format($secs,1); 
+		$milliseconds = number_format($secs,2); 
 		$milliseconds = (integer)$milliseconds;
 		
 		if($from_id<$to_id){
