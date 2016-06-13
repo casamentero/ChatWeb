@@ -108,6 +108,10 @@ class ChatController extends ActiveController
 				)');
 			} elseif(count($users)>2){
 				$q->andWhere('((chat.from_id IN('.$users.')) AND (chat.to_id IN('.$users.')))');
+			} elseif(count($users)==1){
+				$q->andWhere('(
+				(chat.from_id = '.$users[0].') || (chat.to_id  = '.$users[0].')
+				)');
 			}
 		}
 		
