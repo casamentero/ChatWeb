@@ -17,12 +17,13 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-		/*
+		
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+			'enableSession'=>false
         ],
-		*/
+		
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -49,7 +50,11 @@ $config = [
 			'enableStrictParsing' => true,
 			'showScriptName' => false,
 			'rules' => [
-				['class' => 'yii\rest\UrlRule', 'controller' => ['api/user','api/profile','api/language','api/chat']],
+				[
+					'class' => 'yii\rest\UrlRule',
+					'controller' => ['api/user','api/profile','api/language','api/chat','api/authenticate'],
+					//'extraPatterns' => ['POST authenticate' => 'authenticate']
+				],
 			],
 		],
         

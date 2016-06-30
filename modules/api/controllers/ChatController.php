@@ -17,7 +17,6 @@
 
 namespace app\modules\api\controllers;
 use yii\rest\ActiveController;
-use app\modules\api\models\User;
 use app\modules\api\models\Profile;
 use app\modules\api\models\Chat;
 use app\modules\api\models\ChatTranslation;
@@ -33,7 +32,9 @@ class ChatController extends ActiveController
 	
 	public function behaviors()
 	{
-		return [
+		$behaviors = parent::behaviors();
+	
+		$arr =  [
 			[
 				'class' => 'yii\filters\ContentNegotiator',
 				'only' => ['create','index','view'],  // in a controller
@@ -57,6 +58,8 @@ class ChatController extends ActiveController
 				],
 			]
 		];
+		
+		return array_merge($behaviors,$arr);
 	}
 
 	public function actions()

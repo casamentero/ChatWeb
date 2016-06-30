@@ -86,4 +86,25 @@ class User extends \dektrium\user\models\User
 		$this->save();
 	}
 	
+	
+	public function auth($username, $password)
+	{
+		if(($username!="") && ($password!=""))
+		{
+			if(filter_var($username, FILTER_VALIDATE_EMAIL)){
+				$user = \app\models\User::findOne(['email' => $username]);
+			} else{
+				$user = \app\models\User::findOne(['username' => $username]);
+			}
+			
+			if ($user === null || !\dektrium\user\helpers\Password::validate($password, $user->password_hash)) {
+				throw new \yii\web\HttpException(404, 'Invalid login or password');
+			} else{
+				return $user;
+			}
+		} else{
+			throw new \yii\web\HttpException(404, 'Invalid login or password');
+		}
+	}
+	
 }
