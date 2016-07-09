@@ -89,7 +89,7 @@ class ChatController extends ActiveController
 		http://api.chatndate.com/web/api/chats?direction=backward&startpoint=78124568
 		Options:
 		direction = forward|backward
-		startpoint: chat_message_en_id from where you want to get records
+		startpoint: chat_message_id from where you want to get records
 		*/
 	
 		$users 		= Yii::$app->request->get('users');
@@ -161,7 +161,7 @@ class ChatController extends ActiveController
 		}	
 		
 		if($startpoint!=""){
-			$chat = Chat::find()->select('id')->where(['chat_message_en_id'=>$startpoint])->one();
+			$chat = Chat::find()->select('id')->where(['chat_message_id'=>$startpoint])->one();
 			if($chat===null){
 				throw new \yii\web\HttpException(404, 'error');
 			}
@@ -195,7 +195,7 @@ class ChatController extends ActiveController
 		$chat->to_id 				= Yii::$app->request->post('to_id');
 		$chat->chat_message_en 		= Yii::$app->request->post('chat_message_en');
 		$chat->chat_message_es 		= Yii::$app->request->post('chat_message_es');
-		$chat->chat_message_en_id 	= $this->generateMessageId($chat->from_id,$chat->to_id);
+		$chat->chat_message_id 	= $this->generateMessageId($chat->from_id,$chat->to_id);
 		$chat->languages_id 		= Yii::$app->request->post('languages_id');
 		
 		//Chat message object
@@ -204,7 +204,7 @@ class ChatController extends ActiveController
 		$message->to_id 				= $chat->to_id;
 		$message->chat_message_en 		= $chat->chat_message_en;
 		$message->chat_message_es 		= $chat->chat_message_es;
-		$message->chat_message_en_id 	= $chat->chat_message_en_id;
+		$message->chat_message_id 	= $chat->chat_message_id;
 		$message->languages_id 			= $chat->languages_id;
 		$message->created_at 			= time();
 		
@@ -233,7 +233,7 @@ class ChatController extends ActiveController
 				$channel->close();
 				$connection->close();
 				
-				$response = ["chat_message_en_id" => $chat->chat_message_en_id];
+				$response = ["chat_message_id" => $chat->chat_message_id];
 				return $response;
 			} catch(Exception $e) {
 				throw new \yii\web\HttpException(422, 'error');

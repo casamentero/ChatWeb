@@ -34,7 +34,7 @@ class ChatworkerController extends Controller{
 			$chat->to_id 				= $body['to_id'];
 			$chat->chat_message_en 		= $body['chat_message_en'];
 			$chat->chat_message_es 		= $body['chat_message_es'];
-			$chat->chat_message_en_id 	= $body['chat_message_en_id'];
+			$chat->chat_message_id 		= $body['chat_message_id'];
 			$chat->languages_id 		= $body['languages_id'];
 			$chat->created_at 			= $body['created_at'];
 			$chat->save();

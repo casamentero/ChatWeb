@@ -59,8 +59,8 @@ class Chat extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['from_id', 'to_id', 'chat_message_en', 'chat_message_es', 'chat_message_en_id', 'languages_id'], 'required'],
-            [['from_id', 'to_id', 'chat_message_en_id', 'languages_id', 'created_at', 'updated_at', 'is_read'], 'integer'],
+            [['from_id', 'to_id', 'chat_message_en', 'chat_message_es', 'chat_message_id', 'languages_id'], 'required'],
+            [['from_id', 'to_id', 'chat_message_id', 'languages_id', 'created_at', 'updated_at', 'is_read'], 'integer'],
             [['chat_message_en', 'chat_message_es'], 'string'],
             [['languages_id'], 'exist', 'skipOnError' => true, 'targetClass' => Languages::className(), 'targetAttribute' => ['languages_id' => 'id']],
             [['from_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['from_id' => 'id']],
@@ -80,7 +80,7 @@ class Chat extends \yii\db\ActiveRecord
             'to_id' => 'To ID',
             'chat_message_en' => 'Chat Message English',
             'chat_message_es' => 'Chat Message Spanish',
-            'chat_message_en_id' => 'Chat Message ID',
+            'chat_message_id' => 'Chat Message ID',
             'languages_id' => 'Languages ID',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
