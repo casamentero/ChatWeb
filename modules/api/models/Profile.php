@@ -38,18 +38,21 @@ class Profile extends \dektrium\user\models\Profile
     public function rules()
     {
         return [
-            'bioString'            => ['bio', 'string'],
-            'publicEmailPattern'   => ['public_email', 'email'],
-            'gravatarEmailPattern' => ['gravatar_email', 'email'],
-            'websiteUrl'           => ['website', 'url'],
-            'nameLength'           => ['name', 'string', 'max' => 255],
-            'publicEmailLength'    => ['public_email', 'string', 'max' => 255],
-            'gravatarEmailLength'  => ['gravatar_email', 'string', 'max' => 255],
-            'locationLength'       => ['location', 'string', 'max' => 255],
-            'websiteLength'        => ['website', 'string', 'max' => 255],
-            'first_name'            => ['first_name', 'safe'],
-            'last_name'            => ['last_name', 'safe'],
-            'languages_id'         => ['languages_id', 'safe'],
+            'first_name'        => ['first_name', 'safe'],
+            'last_name'         => ['last_name', 'safe'],
+            'languages_id'      => ['languages_id', 'safe'],
+            'gender'         	=> ['gender', 'safe'],
+            'appellido_paterno' => ['appellido_paterno', 'safe'],
+            'appellido_mother'  => ['appellido_mother', 'safe'],
+            'places_country_id' => ['places_country_id', 'safe'],
+            'places_state_id'   => ['places_state_id', 'safe'],
+            'address'         	=> ['address', 'safe'],
+            'dob'         	   	=> ['dob', 'safe'],
+            'height_ft'       	=> ['height_ft', 'safe'],
+            'weight_kg'       	=> ['weight_kg', 'safe'],
+            'profession'      	=> ['profession', 'safe'],
+            'education'       	=> ['education', 'safe'],
+            'description'     	=> ['description', 'safe'],
         ];
     }
 
@@ -64,7 +67,6 @@ class Profile extends \dektrium\user\models\Profile
             'gravatar_email' => \Yii::t('user', 'Gravatar email'),
             'location'       => \Yii::t('user', 'Location'),
             'website'        => \Yii::t('user', 'Website'),
-            'bio'            => \Yii::t('user', 'Bio'),
         ];
     }
 }

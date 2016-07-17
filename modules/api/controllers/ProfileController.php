@@ -30,10 +30,12 @@ class ProfileController extends ActiveController
 	
 	public function behaviors()
 	{
-		return [
+		$behaviors = parent::behaviors();
+	
+		$arr = [
 			[
 				'class' => 'yii\filters\ContentNegotiator',
-				'only' => ['index','view'],  // in a controller
+				'only' => ['create','index','view','update','authenticate'],  // in a controller
 				'formats' => [
 					'application/json' => Response::FORMAT_JSON,
 				],
@@ -42,6 +44,7 @@ class ProfileController extends ActiveController
 					'de',
 				],
 			],
+			
 			[
 				'class' => \yii\filters\Cors::className(),
 				'cors' => [
@@ -51,14 +54,50 @@ class ProfileController extends ActiveController
 					'Access-Control-Allow-Credentials' => true,
 					'Access-Control-Max-Age' => 86400,
 				],
-			]			
+			]
+		
 		];
+		
+		return array_merge($behaviors,$arr);
 	}
 
 	public function actions()
     {
         $actions = parent::actions();
         unset($actions['create']);
+        unset($actions['update']);
         return $actions;
     }
+	
+	#PATCH /profiles/3
+	/*
+	curl -X PUT -d '{"first_name":"Jack","last_name":"Sparrow"}' "http://localhost/ChatWeb/web/api/profiles/3"
+	*/
+	//http://api.chatndate.com/web/api/profiles/1
+	
+    public function actionUpdate($id){
+        // implement here your code
+
+        $model = Yii::createObject(Profile::className());
+		$profile = $model->findOne($id);
+		
+		$jsonRawBody = Yii::$app->request->getRawBody();
+		$param = Json::decode($jsonRawBody);
+
+		$profile->attributes = $param;
+		
+        if($profile->validate()) {
+			if($profile->save()){
+				throw new \yii\web\HttpException(200, 'Profile updated successfully.');
+			} else{
+				throw new \yii\web\HttpException(422, 'error');
+			}
+		} else{
+			$errors = $profile->getErrors();
+			$errors = Json::encode($errors);
+			throw new \yii\web\HttpException(422,$errors);
+		}
+	}	
+	
+	
 }
