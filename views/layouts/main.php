@@ -45,7 +45,7 @@ AppAsset::register($this);
 
   <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
-      <div class="container">
+      <div class="container" style="margin-top:30px;">
         <br><br>
         <h1 class="header center blue-text text-lighten-5">Welcome to Chat-nDate</h1>
         <div class="row center">
