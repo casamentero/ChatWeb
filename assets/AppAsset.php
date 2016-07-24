@@ -18,12 +18,16 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
+        'theme/css/materialize.min.css',
+        'theme/css/style.css',
+		'https://fonts.googleapis.com/icon?family=Material+Icons'
     ];
     public $js = [
+        'theme/js/materialize.min.js',
+        'theme/js/init.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        //'yii\bootstrap\BootstrapAsset',
     ];
 }

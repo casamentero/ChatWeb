@@ -47,7 +47,7 @@ $config = [
         
 		'urlManager' => [
 			'enablePrettyUrl' => true,
-			'enableStrictParsing' => true,
+			'enableStrictParsing' => false,
 			'showScriptName' => false,
 			'rules' => [
 				[
@@ -83,7 +83,7 @@ $config = [
 			'class' => 'yii\web\Response',
 			'on beforeSend' => function ($event) {
 				$response = $event->sender;
-				if ($response->data !== null) {
+				if ((strpos(Yii::$app->request->url, 'api/') !== false) && ($response->data !== null)) {
 						$headers = $response->getHeaders();
 						$moredata = false;
 						if(isset($headers['x-pagination-page-count']) && isset($headers['x-pagination-current-page'])){
