@@ -114,7 +114,15 @@ $config = [
             'user' => 'test',
             'password' => 'test',
             'vhost' => '/',
-        ],		
+        ],
+
+		'view' => [
+			'theme' => [
+				'pathMap' => [
+					'@dektrium/user/views' => '@app/views/user'
+				],
+			],
+		],
 			
 		
     ],

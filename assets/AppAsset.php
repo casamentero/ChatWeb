@@ -20,7 +20,8 @@ class AppAsset extends AssetBundle
     public $css = [
         'theme/css/materialize.min.css',
         'theme/css/style.css',
-		'https://fonts.googleapis.com/icon?family=Material+Icons'
+		'https://fonts.googleapis.com/icon?family=Material+Icons',
+		'theme/bootstrap-4.0.0-alpha.3/css/bootstrap.min.css',
     ];
     public $js = [
         'theme/js/materialize.min.js',

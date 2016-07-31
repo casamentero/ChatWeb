@@ -26,14 +26,14 @@ AppAsset::register($this);
 
 <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-      <a id="logo-container" href="#" class="brand-logo"><img src="<?php echo Yii::$app->request->baseUrl; ?>/theme/images/logo_us.png" alt="Chat N Date" height="60" /></a>
+      <a id="logo-container" href="<?php echo Yii::$app->urlManager->createUrl('site/index'); ?>" class="brand-logo"><img src="<?php echo Yii::$app->request->baseUrl; ?>/theme/images/logo_us.png" alt="Chat N Date" height="40" /></a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">Home</a></li>
+        <li><a href="<?php echo Yii::$app->urlManager->createUrl('site/index'); ?>">Home</a></li>
         <li><a href="#">Gallery</a></li>
         <li><a href="#">Pricing & Services</a></li>
         <li><a href="#">Events</a></li>
         <li><a href="#">Why Chat-nDate ™</a></li>
-        <li><a href="#">Login</a></li>
+        <li><a href="<?php echo Yii::$app->urlManager->createUrl('site/login'); ?>">Login</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
@@ -42,99 +42,10 @@ AppAsset::register($this);
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
-
-  <div id="index-banner" class="parallax-container">
-    <div class="section no-pad-bot">
-      <div class="container" style="margin-top:30px;">
-        <br><br>
-        <h1 class="header center blue-text text-lighten-5">Welcome to Chat-nDate</h1>
-        <div class="row center">
-          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-        </div>
-        <div class="row center">
-          <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light blue darken-3">Get Started</a>
-        </div>
-        <br><br>
-
-      </div>
-    </div>
-    <div class="parallax"><img src="<?php echo Yii::$app->request->baseUrl; ?>/theme/images/new-features.jpg" alt="Unsplashed background img 1"></div>
-  </div>
   
+  <?php echo $content; ?>
 
-  <div class="container">
-    <div class="section">
-
-      <!--   Icon Section   -->
-      <div class="row">
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
-            <h5 class="center">Speeds up development</h5>
-
-            <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
-          </div>
-        </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">group</i></h2>
-            <h5 class="center">User Experience Focused</h5>
-
-            <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
-          </div>
-        </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">settings</i></h2>
-            <h5 class="center">Easy to work with</h5>
-
-            <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <div class="row center">
-          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-        </div>
-      </div>
-    </div>
-    <div class="parallax"><img src="<?php echo Yii::$app->request->baseUrl; ?>/theme/images/Qbf8yp7KTXkasd9mhlaKYRevPNxbJNf0.jpg" alt="Unsplashed background img 2"></div>
-  </div>
-
-  <div class="container">
-    <div class="section">
-
-      <div class="row">
-        <div class="col s12 center">
-          <h3><i class="mdi-content-send brown-text"></i></h3>
-          <h4>Contact Us</h4>
-          <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <div class="row center">
-          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-        </div>
-      </div>
-    </div>
-    <div class="parallax"><img src="<?php echo Yii::$app->request->baseUrl; ?>/theme/images/new-features.jpg" alt="Unsplashed background img 3"></div>
-  </div>
+ 
 
   <footer class="page-footer teal">
     <div class="container">
