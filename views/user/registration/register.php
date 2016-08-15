@@ -21,13 +21,14 @@ use yii\widgets\ActiveForm;
 $this->title = Yii::t('user', 'Sign up');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<div class="section">
+<div class="container">
+
 <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-            </div>
-            <div class="panel-body">
+    <div class="col m6 s12 offset-m3">
+			<h1 class="panel-title"><?= Html::encode($this->title) ?></h1>
+			
                 <?php $form = ActiveForm::begin([
                     'id'                     => 'registration-form',
                     'enableAjaxValidation'   => true,
@@ -36,19 +37,39 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'email') ?>
 
-                <?= $form->field($model, 'username') ?>
-
                 <?php if ($module->enableGeneratingPassword == false): ?>
                     <?= $form->field($model, 'password')->passwordInput() ?>
                 <?php endif ?>
+				
+				<p>
+				<?= $form->field($model, 'gender')->radioList(
+				['MALE' => 'Male', 'FEMALE' => 'Female'],
+				[
+					'item' => function($index, $label, $name, $checked, $value) {
 
+						$return = '';
+						$return .= '<input id="gender-'.$value.'" type="radio" name="' . $name . '" value="' . $value . '">';
+						$return .= '<label for="gender-'.$value.'">' . ucwords($label) . '</label>';
+						$return .= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+
+						return $return;
+					}
+				]				
+				
+				)->label(false) ?>
+				</p>
+
+				<div class="clearfix">&nbsp;</div>
                 <?= Html::submitButton(Yii::t('user', 'Sign up'), ['class' => 'btn btn-success btn-block']) ?>
 
                 <?php ActiveForm::end(); ?>
-            </div>
-        </div>
-        <p class="text-center">
+				
+			<p class="text-center">
             <?= Html::a(Yii::t('user', 'Already registered? Sign in!'), ['/user/security/login']) ?>
-        </p>
+			</p>
     </div>
+</div>
+
+
+</div>
 </div>

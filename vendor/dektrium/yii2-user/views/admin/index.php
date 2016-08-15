@@ -13,7 +13,6 @@ use dektrium\user\models\UserSearch;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
-use yii\jui\DatePicker;
 use yii\web\View;
 use yii\widgets\Pjax;
 
@@ -36,9 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php Pjax::begin() ?>
 
 <?= GridView::widget([
-    'dataProvider' 	=> $dataProvider,
-    'filterModel'  	=> $searchModel,
-    'layout'  		=> "{items}\n{pager}",
+    'dataProvider'  =>  $dataProvider,
+    'filterModel'   =>  $searchModel,
+    'layout'        =>  "{items}\n{pager}",
     'columns' => [
         'username',
         'email:email',
@@ -60,20 +59,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     return date('Y-m-d G:i:s', $model->created_at);
                 }
             },
-            'filter' => DatePicker::widget([
-                'model'      => $searchModel,
-                'attribute'  => 'created_at',
-                'dateFormat' => 'php:Y-m-d',
-                'options' => [
-                    'class' => 'form-control',
-                ],
-            ]),
         ],
         [
             'header' => Yii::t('user', 'Confirmation'),
             'value' => function ($model) {
                 if ($model->isConfirmed) {
-                    return '<div class="text-center"><span class="text-success">' . Yii::t('user', 'Confirmed') . '</span></div>';
+                    return '<div class="text-center">
+                                <span class="text-success">' . Yii::t('user', 'Confirmed') . '</span>
+                            </div>';
                 } else {
                     return Html::a(Yii::t('user', 'Confirm'), ['confirm', 'id' => $model->id], [
                         'class' => 'btn btn-xs btn-success btn-block',

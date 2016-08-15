@@ -57,19 +57,28 @@ return array (
       '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker',
     ),
   ),
-  'yiisoft/yii2-jui' => 
+  'richweber/yii2-google-translate-api' => 
   array (
-    'name' => 'yiisoft/yii2-jui',
-    'version' => '2.0.5.0',
+    'name' => 'richweber/yii2-google-translate-api',
+    'version' => '9999999-dev',
     'alias' => 
     array (
-      '@yii/jui' => $vendorDir . '/yiisoft/yii2-jui',
+      '@richweber/google/translate' => $vendorDir . '/richweber/yii2-google-translate-api',
+    ),
+  ),
+  'yiisoft/yii2-httpclient' => 
+  array (
+    'name' => 'yiisoft/yii2-httpclient',
+    'version' => '2.0.1.0',
+    'alias' => 
+    array (
+      '@yii/httpclient' => $vendorDir . '/yiisoft/yii2-httpclient',
     ),
   ),
   'yiisoft/yii2-authclient' => 
   array (
     'name' => 'yiisoft/yii2-authclient',
-    'version' => '2.0.5.0',
+    'version' => '2.1.0.0',
     'alias' => 
     array (
       '@yii/authclient' => $vendorDir . '/yiisoft/yii2-authclient',
@@ -78,20 +87,20 @@ return array (
   'dektrium/yii2-user' => 
   array (
     'name' => 'dektrium/yii2-user',
-    'version' => '0.9.6.0',
+    'version' => '9999999-dev',
     'alias' => 
     array (
       '@dektrium/user' => $vendorDir . '/dektrium/yii2-user',
     ),
     'bootstrap' => 'dektrium\\user\\Bootstrap',
   ),
-  'richweber/yii2-google-translate-api' => 
+  'yii2mod/yii2-sweet-alert' => 
   array (
-    'name' => 'richweber/yii2-google-translate-api',
-    'version' => '9999999-dev',
+    'name' => 'yii2mod/yii2-sweet-alert',
+    'version' => '1.2.0.0',
     'alias' => 
     array (
-      '@richweber/google/translate' => $vendorDir . '/richweber/yii2-google-translate-api',
+      '@yii2mod/alert' => $vendorDir . '/yii2mod/yii2-sweet-alert',
     ),
   ),
 );

@@ -18,6 +18,10 @@ $this->title = $title;
 
 ?>
 
-<?= $this->render('/_alert', [
-    'module' => $module,
-]) ?>
+<div class="section">
+	<div class="container">
+	<?= $this->render('/_alert', [
+		'module' => $module,
+	]) ?>
+	</div>
+</div>

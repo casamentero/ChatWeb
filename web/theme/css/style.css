@@ -55,3 +55,22 @@ p {
 footer.page-footer {
   margin: 0;
 }
+
+.has-error .help-block{color:red}
+
+.alert{
+padding:30px;
+background-color:#fafafa;
+}
+
+.alert-success{
+background-color:#9DE1AF;
+}
+
+.alert-danger{
+background-color:#FCC0C0;
+}
+
+.alert-info{
+background-color:#B3E0EF;
+}

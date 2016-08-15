@@ -7,7 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'yii\\swiftmailer\\' => array($vendorDir . '/yiisoft/yii2-swiftmailer'),
-    'yii\\jui\\' => array($vendorDir . '/yiisoft/yii2-jui'),
+    'yii\\httpclient\\' => array($vendorDir . '/yiisoft/yii2-httpclient'),
     'yii\\gii\\' => array($vendorDir . '/yiisoft/yii2-gii'),
     'yii\\faker\\' => array($vendorDir . '/yiisoft/yii2-faker'),
     'yii\\debug\\' => array($vendorDir . '/yiisoft/yii2-debug'),
@@ -16,6 +16,7 @@ return array(
     'yii\\bootstrap\\' => array($vendorDir . '/yiisoft/yii2-bootstrap'),
     'yii\\authclient\\' => array($vendorDir . '/yiisoft/yii2-authclient'),
     'yii\\' => array($vendorDir . '/yiisoft/yii2'),
+    'yii2mod\\alert\\' => array($vendorDir . '/yii2mod/yii2-sweet-alert'),
     'webtoucher\\commands\\' => array($vendorDir . '/webtoucher/yii2-commands'),
     'webtoucher\\amqp\\' => array($vendorDir . '/webtoucher/yii2-amqp'),
     'richweber\\google\\translate\\' => array($vendorDir . '/richweber/yii2-google-translate-api'),

@@ -25,15 +25,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $this->render('/_alert', ['module' => Yii::$app->getModule('user')]) ?>
 
+<div class="section">
+
 <div class="container">
 
 	<div class="row">
-		<div class="col-md-4 col-md-offset-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-				</div>
-				<div class="panel-body">
+		<div class="col s6 offset-s3">
+					<h1 class="panel-title"><?= Html::encode($this->title) ?></h1>
+					
 					<?php $form = ActiveForm::begin([
 						'id'                     => 'login-form',
 						'enableAjaxValidation'   => true,
@@ -49,25 +48,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
 					<?= $form->field($model, 'rememberMe')->checkbox(['tabindex' => '4']) ?>
 
-					<?= Html::submitButton(Yii::t('user', 'Sign in'), ['class' => 'btn btn-primary btn-block', 'tabindex' => '3']) ?>
+					<?= Html::submitButton(Yii::t('user', 'Sign in'), ['class' => 'btn btn-primary', 'tabindex' => '3']) ?>
 
 					<?php ActiveForm::end(); ?>
-				</div>
-			</div>
-			<?php if ($module->enableConfirmation): ?>
-				<p class="text-center">
-					<?= Html::a(Yii::t('user', 'Didn\'t receive confirmation message?'), ['/user/registration/resend']) ?>
-				</p>
-			<?php endif ?>
-			<?php if ($module->enableRegistration): ?>
-				<p class="text-center">
-					<?= Html::a(Yii::t('user', 'Don\'t have an account? Sign up!'), ['/user/registration/register']) ?>
-				</p>
-			<?php endif ?>
-			<?= Connect::widget([
-				'baseAuthUrl' => ['/user/security/auth'],
-			]) ?>
+					
+				<?php if ($module->enableConfirmation): ?>
+					<p class="text-center">
+						<?= Html::a(Yii::t('user', 'Didn\'t receive confirmation message?'), ['/user/registration/resend']) ?>
+					</p>
+				<?php endif ?>
+				<?php if ($module->enableRegistration): ?>
+					<p class="text-center">
+						<?= Html::a(Yii::t('user', 'Don\'t have an account? Sign up!'), ['/user/registration/register']) ?>
+					</p>
+				<?php endif ?>
+				<?= Connect::widget([
+					'baseAuthUrl' => ['/user/security/auth'],
+				]) ?>
 		</div>
 	</div>
+
+</div>
 
 </div>

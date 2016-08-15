@@ -22,7 +22,7 @@ use yii\base\Module as BaseModule;
  */
 class Module extends BaseModule
 {
-    const VERSION = '0.9.6';
+    const VERSION = '0.9.9';
 
     /** Email is changed right after user enter's new email address. */
     const STRATEGY_INSECURE = 0;
@@ -51,6 +51,9 @@ class Module extends BaseModule
     /** @var bool Whether to enable password recovery. */
     public $enablePasswordRecovery = true;
 
+    /** @var bool Whether user can remove his account */
+    public $enableAccountDelete = false;
+
     /** @var int Email changing strategy. */
     public $emailChangeStrategy = self::STRATEGY_DEFAULT;
 
@@ -68,8 +71,8 @@ class Module extends BaseModule
 
     /** @var array An array of administrator's usernames. */
     public $admins = [];
-	
-	/** @var string The Administrator permission name. */
+
+    /** @var string The Administrator permission name. */
     public $adminPermission;
 
     /** @var array Mailer configuration */

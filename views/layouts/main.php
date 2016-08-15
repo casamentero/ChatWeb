@@ -33,7 +33,13 @@ AppAsset::register($this);
         <li><a href="#">Pricing & Services</a></li>
         <li><a href="#">Events</a></li>
         <li><a href="#">Why Chat-nDate ™</a></li>
-        <li><a href="<?php echo Yii::$app->urlManager->createUrl('site/login'); ?>">Login</a></li>
+		
+		<?php if(Yii::$app->user->isGuest): ?>
+        <li><a href="<?php echo Yii::$app->urlManager->createUrl('user/security/login'); ?>">Login</a></li>
+        <li><a href="<?php echo Yii::$app->urlManager->createUrl('user/registration/register'); ?>">Register</a></li>
+		<?php else: ?>
+        <li><a href="<?php echo Yii::$app->urlManager->createUrl('user/security/logout'); ?>">Logut</a></li>
+		<?php endif; ?>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">

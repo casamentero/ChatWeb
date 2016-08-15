@@ -1,5 +1,26 @@
 # CHANGELOG
 
+## 0.9.9 [13 August 2016]
+
+- Enh #746: Changed AccessRule to check other roles/permissions (markux)
+- Enh #649: Updated test suite to codeception 2.2 (dmeroff)
+- Enh #725: Removed message that user is not registered in Recovery and Resend forms (dmeroff)
+- Fix #747: Fixed reverting migrations on PostgreSQL (dmeroff)
+
+## 0.9.8 [09 August 2016]
+
+- Fix: Fixed Yandex auth client (dmeroff)
+
+## 0.9.7 [09 August 2016]
+
+- Enh: Updated Yii2-authclient required version to 2.1.0 (dmeroff)
+- Fix: Max password length set to 72 chars (dmeroff)
+- Enh #378: Added events before and after confirmation (dmeroff)
+- Enh #593: Added option to allow users to remove their accounts (dmeroff)
+- Enh #705: Jui datepicker dependency has been removed (dmeroff) 
+- Enh #648: Refactored ajax validation trait (dmeroff)
+- Enh #581, #164: Added ability for users to set their timezones (yarrgh)
+
 ## 0.9.6 [27 March 2016]
 
 - `enh` Added new method to Profile model to get avatar url (dmeroff)

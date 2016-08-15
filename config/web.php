@@ -27,6 +27,11 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+		
+		/*
+yiiplugs@gmail.com
+inder1245678
+*/		
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set
@@ -129,6 +134,10 @@ $config = [
 	'modules' => [
 		'user' => [
 			'class' => 'dektrium\user\Module',
+			'modelMap' => [
+				'RegistrationForm' 	=> 'app\models\user\RegistrationForm',
+				'Profile' 			=> 'app\models\user\Profile',
+			],
 		],	
 		'api' => [
 			'class' => 'app\modules\api\Module',
